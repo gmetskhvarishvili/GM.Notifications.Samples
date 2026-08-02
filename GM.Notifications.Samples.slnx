@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/Solution Items/Meta/">
+    <File Path="README.md" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="LICENSE" />
+  </Folder>
+  <Folder Name="/Solution Items/Build/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path=".dockerignore" />
+  </Folder>
+  <Folder Name="/Solution Items/CI/">
+    <File Path=".github/workflows/ci.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="GM.Notifications.Sample.API/GM.Notifications.Sample.API.csproj" />
+    <Project Path="GM.Notifications.Sample.Application/GM.Notifications.Sample.Application.csproj" />
+    <Project Path="GM.Notifications.Sample.Common/GM.Notifications.Sample.Common.csproj" />
+    <Project Path="GM.Notifications.Sample.Domain/GM.Notifications.Sample.Domain.csproj" />
+    <Project Path="GM.Notifications.Sample.Infrastructure/GM.Notifications.Sample.Infrastructure.csproj" />
+    <Project Path="GM.Notifications.Sample.Persistence/GM.Notifications.Sample.Persistence.csproj" />
+    <Project Path="GM.Notifications.Sample.Worker/GM.Notifications.Sample.Worker.csproj" />
+    <Project Path="GM.Notifications.Sample.Consumer.Worker/GM.Notifications.Sample.Consumer.Worker.csproj" />
+    <Project Path="GM.Notifications.Sample.EmailWorker/GM.Notifications.Sample.EmailWorker.csproj" />
+    <Project Path="GM.Notifications.Sample.SmsWorker/GM.Notifications.Sample.SmsWorker.csproj" />
+    <Project Path="GM.Notifications.Sample.WhatsAppWorker/GM.Notifications.Sample.WhatsAppWorker.csproj" />
+    <Project Path="GM.Notifications.Sample.PushWorker/GM.Notifications.Sample.PushWorker.csproj" />
+    <Project Path="GM.Notifications.Sample.SlackWorker/GM.Notifications.Sample.SlackWorker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GM.Notifications.Sample.Tests/GM.Notifications.Sample.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GM.Notifications.Sample.API</name>
+    </assembly>
+    <members>
+        <member name="T:GM.Notifications.Sample.API.Emails.EmailNotificationsController">
+            <summary>
+            Email Notifications Controller
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Emails.EmailNotificationsController.SendEmail(GM.Notifications.Sample.API.Emails.SendEmailRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send an email notification
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Emails.EmailNotificationsController.SendEmailsBatch(GM.Notifications.Sample.API.Emails.SendEmailsBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a batch of email notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Emails.EmailNotificationsController.GetEmailById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get an email notification by id
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Emails.EmailNotificationsController.GetEmailsList(System.Nullable{GM.Notifications.Domain.Enums.NotificationStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of email notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Emails.EmailNotificationsController.CancelEmail(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a pending email notification
+            </summary>
+        </member>
+        <member name="T:GM.Notifications.Sample.API.Pushes.PushNotificationsController">
+            <summary>
+            Push Notifications Controller
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Pushes.PushNotificationsController.SendPush(GM.Notifications.Sample.API.Pushes.SendPushRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a push notification
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Pushes.PushNotificationsController.SendPushesBatch(GM.Notifications.Sample.API.Pushes.SendPushesBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a batch of push notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Pushes.PushNotificationsController.GetPushById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get a push notification by id
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Pushes.PushNotificationsController.GetPushesList(System.Nullable{GM.Notifications.Domain.Enums.NotificationStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of push notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Pushes.PushNotificationsController.CancelPush(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a pending push notification
+            </summary>
+        </member>
+        <member name="T:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController">
+            <summary>
+            Slack Notifications Controller
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController.SendSlack(GM.Notifications.Sample.API.SlackMessages.SendSlackRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a Slack notification
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController.SendSlackBatch(GM.Notifications.Sample.API.SlackMessages.SendSlackBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a batch of Slack notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController.GetSlackMessageById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get a Slack notification by id
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController.GetSlackMessagesList(System.Nullable{GM.Notifications.Domain.Enums.NotificationStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of Slack notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.SlackMessages.SlackNotificationsController.CancelSlack(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a pending Slack notification
+            </summary>
+        </member>
+        <member name="T:GM.Notifications.Sample.API.Smses.SmsNotificationsController">
+            <summary>
+            SMS Notifications Controller
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Smses.SmsNotificationsController.SendSms(GM.Notifications.Sample.API.Smses.SendSmsRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send an SMS notification
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Smses.SmsNotificationsController.SendSmsesBatch(GM.Notifications.Sample.API.Smses.SendSmsesBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a batch of SMS notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Smses.SmsNotificationsController.GetSmsById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get an SMS notification by id
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Smses.SmsNotificationsController.GetSmsesList(System.Nullable{GM.Notifications.Domain.Enums.NotificationStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of SMS notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.Smses.SmsNotificationsController.CancelSms(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a pending SMS notification
+            </summary>
+        </member>
+        <member name="T:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController">
+            <summary>
+            WhatsApp Notifications Controller
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController.SendWhatsApp(GM.Notifications.Sample.API.WhatsAppMessages.SendWhatsAppRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a WhatsApp notification
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController.SendWhatsAppBatch(GM.Notifications.Sample.API.WhatsAppMessages.SendWhatsAppBatchRequest,System.Threading.CancellationToken)">
+            <summary>
+            Send a batch of WhatsApp notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController.GetWhatsAppById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get a WhatsApp notification by id
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController.GetWhatsAppMessagesList(System.Nullable{GM.Notifications.Domain.Enums.NotificationStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of WhatsApp notifications
+            </summary>
+        </member>
+        <member name="M:GM.Notifications.Sample.API.WhatsAppMessages.WhatsAppNotificationsController.CancelWhatsApp(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a pending WhatsApp notification
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>

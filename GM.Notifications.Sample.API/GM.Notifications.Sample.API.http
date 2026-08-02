@@ -1,0 +1,6 @@
+@GM.Notifications.Sample.API_HostAddress = http://localhost:5241
+
+GET {{GM.Notifications.Sample.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
