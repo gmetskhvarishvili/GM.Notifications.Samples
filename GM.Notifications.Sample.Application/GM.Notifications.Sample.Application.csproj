@@ -8,9 +8,9 @@
 
     <ItemGroup>
         <PackageReference Include="GM.API.Application" Version="1.4.0" />
-        <PackageReference Include="GM.Mediator" Version="1.3.3" />
-        <PackageReference Include="GM.Notifications" Version="1.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.10" />
+        <PackageReference Include="GM.Mediator" Version="1.3.5" />
+        <PackageReference Include="GM.Notifications" Version="1.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.11" />
     </ItemGroup>
 
     <ItemGroup>
