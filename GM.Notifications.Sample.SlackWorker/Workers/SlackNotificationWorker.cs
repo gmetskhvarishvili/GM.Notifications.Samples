@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GM.Notifications.Sample.SlackWorker.Workers;
 
-public class SlackNotificationWorker(
+public sealed class SlackNotificationWorker(
     ILogger<SlackNotificationWorker> logger,
     IServiceScopeFactory scopeFactory,
     NotificationOptions options) : BackgroundService

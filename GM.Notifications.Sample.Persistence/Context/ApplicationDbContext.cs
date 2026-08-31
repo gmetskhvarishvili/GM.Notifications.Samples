@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GM.Notifications.Sample.Persistence.Context;
 
+// Not sealed: used as the generic constraint bound in DesignTimeDbContextFactoryBase<TContext>.
 public class ApplicationDbContext(
     DbContextOptions<ApplicationDbContext> options,
     IClock? clock = null) : GenericDbContext(options)

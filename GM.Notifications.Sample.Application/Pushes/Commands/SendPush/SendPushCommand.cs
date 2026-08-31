@@ -15,7 +15,7 @@ public sealed record SendPushCommand(
 
 public sealed record SendPushResult(Guid NotificationId);
 
-public class SendPushCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendPushCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendPushCommand, SendPushResult>
 {
     public async Task<SendPushResult> Handle(SendPushCommand request, CancellationToken cancellationToken)

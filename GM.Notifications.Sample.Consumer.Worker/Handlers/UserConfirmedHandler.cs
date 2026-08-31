@@ -3,7 +3,7 @@ using GM.Notifications.Sample.Domain.Events.Users;
 
 namespace GM.Notifications.Sample.Consumer.Worker.Handlers;
 
-public class UserConfirmedHandler(IInboxProcessor inbox, ILogger<UserConfirmedHandler> logger)
+public sealed class UserConfirmedHandler(IInboxProcessor inbox, ILogger<UserConfirmedHandler> logger)
 {
     public Task Handle(UserConfirmedIntegrationEvent message, CancellationToken ct)
     {

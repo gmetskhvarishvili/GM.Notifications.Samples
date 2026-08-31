@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace GM.Notifications.Sample.Persistence.UnitOfWork;
 
-public class UnitOfWork(
+public sealed class UnitOfWork(
     ApplicationDbContext context,
     IEmailNotificationRepository emailNotificationRepository,
     ISmsNotificationRepository smsNotificationRepository,

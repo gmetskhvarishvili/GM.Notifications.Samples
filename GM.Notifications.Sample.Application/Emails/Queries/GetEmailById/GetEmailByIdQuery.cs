@@ -22,7 +22,7 @@ public sealed record EmailNotificationDto(
     string? FailureReason,
     string? CorrelationId);
 
-public class GetEmailByIdQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetEmailByIdQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetEmailByIdQuery, EmailNotificationDto?>
 {
     public async Task<EmailNotificationDto?> Handle(GetEmailByIdQuery request, CancellationToken cancellationToken)

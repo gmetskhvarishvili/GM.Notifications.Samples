@@ -18,7 +18,7 @@ public sealed record SendEmailBatchItem(
 
 public sealed record SendEmailsBatchResult(IReadOnlyList<Guid> NotificationIds);
 
-public class SendEmailsBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendEmailsBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendEmailsBatchCommand, SendEmailsBatchResult>
 {
     public async Task<SendEmailsBatchResult> Handle(SendEmailsBatchCommand request, CancellationToken cancellationToken)

@@ -3,4 +3,4 @@ using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.P
 
 namespace GM.Notifications.Sample.Persistence.Configuration;
 
-public class PushNotificationConfiguration() : PushNotificationConfiguration<PushNotification>("push", "PushNotifications");
+public sealed class PushNotificationConfiguration() : PushNotificationConfiguration<PushNotification>("push", "PushNotifications");

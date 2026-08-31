@@ -3,7 +3,7 @@ using GM.Notifications.Sample.Domain.Events.Otp;
 
 namespace GM.Notifications.Sample.Consumer.Worker.Handlers;
 
-public class OtpGeneratedHandler(IInboxProcessor inbox, ILogger<OtpGeneratedHandler> logger)
+public sealed class OtpGeneratedHandler(IInboxProcessor inbox, ILogger<OtpGeneratedHandler> logger)
 {
     public Task Handle(OtpGeneratedIntegrationEvent message, CancellationToken ct)
     {

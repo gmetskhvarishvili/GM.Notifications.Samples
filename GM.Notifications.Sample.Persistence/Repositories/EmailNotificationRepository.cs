@@ -5,5 +5,5 @@ using GM.Notifications.Sample.Persistence.Context;
 
 namespace GM.Notifications.Sample.Persistence.Repositories;
 
-public class EmailNotificationRepository(ApplicationDbContext context)
+public sealed class EmailNotificationRepository(ApplicationDbContext context)
     : GenericRepository<EmailNotification, ApplicationDbContext>(context), IEmailNotificationRepository;

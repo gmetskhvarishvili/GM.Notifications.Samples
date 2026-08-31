@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using GM.API.Controllers;
 using GM.Notifications.Domain.Enums;
 using GM.Notifications.Sample.Application.Smses.Commands.CancelSms;
@@ -13,8 +14,9 @@ namespace GM.Notifications.Sample.API.Smses;
 /// SMS Notifications Controller
 /// </summary>
 [ApiController]
-[Route("api/notifications/smses")]
-public class SmsNotificationsController : BaseController
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/notifications/smses")]
+public sealed class SmsNotificationsController : BaseController
 {
     /// <summary>
     /// Send an SMS notification

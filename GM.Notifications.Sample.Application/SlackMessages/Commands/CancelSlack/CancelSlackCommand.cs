@@ -8,7 +8,7 @@ public sealed record CancelSlackCommand(Guid Id) : IRequest<CancelSlackResult>;
 
 public sealed record CancelSlackResult(bool Success, string? Message = null);
 
-public class CancelSlackCommandHandler(IUnitOfWork unitOfWork)
+public sealed class CancelSlackCommandHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<CancelSlackCommand, CancelSlackResult>
 {
     public async Task<CancelSlackResult> Handle(CancelSlackCommand request, CancellationToken cancellationToken)

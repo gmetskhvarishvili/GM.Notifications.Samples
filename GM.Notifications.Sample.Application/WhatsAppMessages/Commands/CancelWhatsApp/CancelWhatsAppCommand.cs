@@ -8,7 +8,7 @@ public sealed record CancelWhatsAppCommand(Guid Id) : IRequest<CancelWhatsAppRes
 
 public sealed record CancelWhatsAppResult(bool Success, string? Message = null);
 
-public class CancelWhatsAppCommandHandler(IUnitOfWork unitOfWork)
+public sealed class CancelWhatsAppCommandHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<CancelWhatsAppCommand, CancelWhatsAppResult>
 {
     public async Task<CancelWhatsAppResult> Handle(CancelWhatsAppCommand request, CancellationToken cancellationToken)

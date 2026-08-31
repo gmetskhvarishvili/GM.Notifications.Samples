@@ -20,7 +20,7 @@ public sealed record WhatsAppNotificationDto(
     string? FailureReason,
     string? CorrelationId);
 
-public class GetWhatsAppByIdQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetWhatsAppByIdQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetWhatsAppByIdQuery, WhatsAppNotificationDto?>
 {
     public async Task<WhatsAppNotificationDto?> Handle(GetWhatsAppByIdQuery request, CancellationToken cancellationToken)

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using GM.API.Controllers;
 using GM.Notifications.Domain.Enums;
 using GM.Notifications.Sample.Application.Pushes.Commands.CancelPush;
@@ -13,8 +14,9 @@ namespace GM.Notifications.Sample.API.Pushes;
 /// Push Notifications Controller
 /// </summary>
 [ApiController]
-[Route("api/notifications/pushes")]
-public class PushNotificationsController : BaseController
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/notifications/pushes")]
+public sealed class PushNotificationsController : BaseController
 {
     /// <summary>
     /// Send a push notification

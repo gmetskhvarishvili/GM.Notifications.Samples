@@ -14,7 +14,7 @@ public sealed record SendSmsCommand(
 
 public sealed record SendSmsResult(Guid NotificationId);
 
-public class SendSmsCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendSmsCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendSmsCommand, SendSmsResult>
 {
     public async Task<SendSmsResult> Handle(SendSmsCommand request, CancellationToken cancellationToken)

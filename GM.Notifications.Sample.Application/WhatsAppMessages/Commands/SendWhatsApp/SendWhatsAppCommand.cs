@@ -14,7 +14,7 @@ public sealed record SendWhatsAppCommand(
 
 public sealed record SendWhatsAppResult(Guid NotificationId);
 
-public class SendWhatsAppCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendWhatsAppCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendWhatsAppCommand, SendWhatsAppResult>
 {
     public async Task<SendWhatsAppResult> Handle(SendWhatsAppCommand request, CancellationToken cancellationToken)

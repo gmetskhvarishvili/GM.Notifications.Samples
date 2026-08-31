@@ -8,7 +8,7 @@ public sealed record CancelPushCommand(Guid Id) : IRequest<CancelPushResult>;
 
 public sealed record CancelPushResult(bool Success, string? Message = null);
 
-public class CancelPushCommandHandler(IUnitOfWork unitOfWork)
+public sealed class CancelPushCommandHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<CancelPushCommand, CancelPushResult>
 {
     public async Task<CancelPushResult> Handle(CancelPushCommand request, CancellationToken cancellationToken)

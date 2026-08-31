@@ -22,7 +22,7 @@ public sealed record PushNotificationDto(
     string? FailureReason,
     string? CorrelationId);
 
-public class GetPushByIdQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetPushByIdQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetPushByIdQuery, PushNotificationDto?>
 {
     public async Task<PushNotificationDto?> Handle(GetPushByIdQuery request, CancellationToken cancellationToken)

@@ -12,7 +12,7 @@ public sealed record GetSmsesListQuery(
 
 public sealed record GetSmsesListResult(IReadOnlyList<SmsNotificationDto> Items, int TotalCount);
 
-public class GetSmsesListQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetSmsesListQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetSmsesListQuery, GetSmsesListResult>
 {
     public async Task<GetSmsesListResult> Handle(GetSmsesListQuery request, CancellationToken cancellationToken)

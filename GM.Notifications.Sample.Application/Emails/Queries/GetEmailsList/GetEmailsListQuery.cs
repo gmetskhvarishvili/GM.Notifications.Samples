@@ -12,7 +12,7 @@ public sealed record GetEmailsListQuery(
 
 public sealed record GetEmailsListResult(IReadOnlyList<EmailNotificationDto> Items, int TotalCount);
 
-public class GetEmailsListQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetEmailsListQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetEmailsListQuery, GetEmailsListResult>
 {
     public async Task<GetEmailsListResult> Handle(GetEmailsListQuery request, CancellationToken cancellationToken)

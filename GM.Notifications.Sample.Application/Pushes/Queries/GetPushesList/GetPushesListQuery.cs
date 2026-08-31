@@ -12,7 +12,7 @@ public sealed record GetPushesListQuery(
 
 public sealed record GetPushesListResult(IReadOnlyList<PushNotificationDto> Items, int TotalCount);
 
-public class GetPushesListQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetPushesListQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetPushesListQuery, GetPushesListResult>
 {
     public async Task<GetPushesListResult> Handle(GetPushesListQuery request, CancellationToken cancellationToken)
