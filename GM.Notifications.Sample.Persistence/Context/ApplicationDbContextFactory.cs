@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GM.Notifications.Sample.Persistence.Context;
 
-public class ApplicationDbContextFactory : DesignTimeDbContextFactoryBase<ApplicationDbContext>
+public sealed class ApplicationDbContextFactory : DesignTimeDbContextFactoryBase<ApplicationDbContext>
 {
     protected override ApplicationDbContext CreateNewInstance(DbContextOptions<ApplicationDbContext> options)
     {

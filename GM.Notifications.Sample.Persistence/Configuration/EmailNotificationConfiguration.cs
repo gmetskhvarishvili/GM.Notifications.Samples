@@ -3,4 +3,4 @@ using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.E
 
 namespace GM.Notifications.Sample.Persistence.Configuration;
 
-public class EmailNotificationConfiguration() : EmailNotificationConfiguration<EmailNotification>("email", "EmailNotifications");
+public sealed class EmailNotificationConfiguration() : EmailNotificationConfiguration<EmailNotification>("email", "EmailNotifications");

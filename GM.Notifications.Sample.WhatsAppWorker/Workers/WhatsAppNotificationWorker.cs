@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GM.Notifications.Sample.WhatsAppWorker.Workers;
 
-public class WhatsAppNotificationWorker(
+public sealed class WhatsAppNotificationWorker(
     ILogger<WhatsAppNotificationWorker> logger,
     IServiceScopeFactory scopeFactory,
     NotificationOptions options) : BackgroundService

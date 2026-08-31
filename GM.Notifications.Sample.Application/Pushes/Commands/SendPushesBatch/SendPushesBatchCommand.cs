@@ -18,7 +18,7 @@ public sealed record SendPushBatchItem(
 
 public sealed record SendPushesBatchResult(IReadOnlyList<Guid> NotificationIds);
 
-public class SendPushesBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendPushesBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendPushesBatchCommand, SendPushesBatchResult>
 {
     public async Task<SendPushesBatchResult> Handle(SendPushesBatchCommand request, CancellationToken cancellationToken)

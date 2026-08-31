@@ -12,7 +12,7 @@ public sealed record GetWhatsAppMessagesListQuery(
 
 public sealed record GetWhatsAppMessagesListResult(IReadOnlyList<WhatsAppNotificationDto> Items, int TotalCount);
 
-public class GetWhatsAppMessagesListQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetWhatsAppMessagesListQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetWhatsAppMessagesListQuery, GetWhatsAppMessagesListResult>
 {
     public async Task<GetWhatsAppMessagesListResult> Handle(GetWhatsAppMessagesListQuery request, CancellationToken cancellationToken)

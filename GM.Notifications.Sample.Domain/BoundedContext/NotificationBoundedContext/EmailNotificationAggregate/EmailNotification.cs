@@ -2,7 +2,7 @@ using GM.EntityFramework.Domain.Abstractions;
 
 namespace GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.EmailNotificationAggregate;
 
-public class EmailNotification : GM.Notifications.Domain.Entities.EmailNotification, IAggregateRoot
+public sealed class EmailNotification : GM.Notifications.Domain.Entities.EmailNotification, IAggregateRoot
 {
     // For EF materialization; delegates to the protected base parameterless constructor.
     private EmailNotification()

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GM.Notifications.Sample.PushWorker.Workers;
 
-public class PushNotificationWorker(
+public sealed class PushNotificationWorker(
     ILogger<PushNotificationWorker> logger,
     IServiceScopeFactory scopeFactory,
     NotificationOptions options) : BackgroundService

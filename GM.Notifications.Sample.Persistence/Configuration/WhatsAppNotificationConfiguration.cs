@@ -3,4 +3,4 @@ using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.W
 
 namespace GM.Notifications.Sample.Persistence.Configuration;
 
-public class WhatsAppNotificationConfiguration() : WhatsAppNotificationConfiguration<WhatsAppNotification>("whatsapp", "WhatsAppNotifications");
+public sealed class WhatsAppNotificationConfiguration() : WhatsAppNotificationConfiguration<WhatsAppNotification>("whatsapp", "WhatsAppNotifications");

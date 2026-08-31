@@ -20,7 +20,7 @@ public sealed record SmsNotificationDto(
     string? FailureReason,
     string? CorrelationId);
 
-public class GetSmsByIdQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetSmsByIdQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetSmsByIdQuery, SmsNotificationDto?>
 {
     public async Task<SmsNotificationDto?> Handle(GetSmsByIdQuery request, CancellationToken cancellationToken)

@@ -5,5 +5,5 @@ using GM.Notifications.Sample.Persistence.Context;
 
 namespace GM.Notifications.Sample.Persistence.Repositories;
 
-public class WhatsAppNotificationRepository(ApplicationDbContext context)
+public sealed class WhatsAppNotificationRepository(ApplicationDbContext context)
     : GenericRepository<WhatsAppNotification, ApplicationDbContext>(context), IWhatsAppNotificationRepository;

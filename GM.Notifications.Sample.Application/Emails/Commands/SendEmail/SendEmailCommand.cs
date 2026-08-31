@@ -16,7 +16,7 @@ public sealed record SendEmailCommand(
 
 public sealed record SendEmailResult(Guid NotificationId);
 
-public class SendEmailCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendEmailCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendEmailCommand, SendEmailResult>
 {
     public async Task<SendEmailResult> Handle(SendEmailCommand request, CancellationToken cancellationToken)

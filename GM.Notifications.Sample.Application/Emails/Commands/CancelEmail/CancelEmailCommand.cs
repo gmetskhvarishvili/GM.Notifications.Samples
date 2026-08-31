@@ -8,7 +8,7 @@ public sealed record CancelEmailCommand(Guid Id) : IRequest<CancelEmailResult>;
 
 public sealed record CancelEmailResult(bool Success, string? Message = null);
 
-public class CancelEmailCommandHandler(IUnitOfWork unitOfWork)
+public sealed class CancelEmailCommandHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<CancelEmailCommand, CancelEmailResult>
 {
     public async Task<CancelEmailResult> Handle(CancelEmailCommand request, CancellationToken cancellationToken)

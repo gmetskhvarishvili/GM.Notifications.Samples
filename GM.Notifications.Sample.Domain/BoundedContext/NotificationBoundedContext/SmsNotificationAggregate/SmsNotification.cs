@@ -2,7 +2,7 @@ using GM.EntityFramework.Domain.Abstractions;
 
 namespace GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.SmsNotificationAggregate;
 
-public class SmsNotification : GM.Notifications.Domain.Entities.SmsNotification, IAggregateRoot
+public sealed class SmsNotification : GM.Notifications.Domain.Entities.SmsNotification, IAggregateRoot
 {
     private SmsNotification()
     {

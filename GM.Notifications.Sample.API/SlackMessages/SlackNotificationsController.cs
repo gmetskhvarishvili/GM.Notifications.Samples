@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using GM.API.Controllers;
 using GM.Notifications.Domain.Enums;
 using GM.Notifications.Sample.Application.SlackMessages.Commands.CancelSlack;
@@ -13,8 +14,9 @@ namespace GM.Notifications.Sample.API.SlackMessages;
 /// Slack Notifications Controller
 /// </summary>
 [ApiController]
-[Route("api/notifications/slack-messages")]
-public class SlackNotificationsController : BaseController
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/notifications/slack-messages")]
+public sealed class SlackNotificationsController : BaseController
 {
     /// <summary>
     /// Send a Slack notification

@@ -20,7 +20,7 @@ public sealed record SlackNotificationDto(
     string? FailureReason,
     string? CorrelationId);
 
-public class GetSlackMessageByIdQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetSlackMessageByIdQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetSlackMessageByIdQuery, SlackNotificationDto?>
 {
     public async Task<SlackNotificationDto?> Handle(GetSlackMessageByIdQuery request, CancellationToken cancellationToken)

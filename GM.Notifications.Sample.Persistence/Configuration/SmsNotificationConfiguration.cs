@@ -3,4 +3,4 @@ using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.S
 
 namespace GM.Notifications.Sample.Persistence.Configuration;
 
-public class SmsNotificationConfiguration() : SmsNotificationConfiguration<SmsNotification>("sms", "SmsNotifications");
+public sealed class SmsNotificationConfiguration() : SmsNotificationConfiguration<SmsNotification>("sms", "SmsNotifications");

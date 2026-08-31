@@ -2,7 +2,7 @@ using GM.EntityFramework.Domain.Abstractions;
 
 namespace GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.WhatsAppNotificationAggregate;
 
-public class WhatsAppNotification : GM.Notifications.Domain.Entities.WhatsAppNotification, IAggregateRoot
+public sealed class WhatsAppNotification : GM.Notifications.Domain.Entities.WhatsAppNotification, IAggregateRoot
 {
     private WhatsAppNotification()
     {

@@ -13,7 +13,7 @@ public sealed record SendSlackCommand(
 
 public sealed record SendSlackResult(Guid NotificationId);
 
-public class SendSlackCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendSlackCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendSlackCommand, SendSlackResult>
 {
     public async Task<SendSlackResult> Handle(SendSlackCommand request, CancellationToken cancellationToken)

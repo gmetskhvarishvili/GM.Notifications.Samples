@@ -13,19 +13,25 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
 
     public TContext CreateDbContext(string[] args)
     {
-        var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}GM.Notifications.Sample.API", Path.DirectorySeparatorChar);
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "GM.Notifications.Sample.API");
         return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
     }
 
     protected abstract TContext CreateNewInstance(DbContextOptions<TContext> options);
 
-    private TContext Create(string basePath, string environmentName)
+    private TContext Create(string basePath, string? environmentName)
     {
-        var configuration = new ConfigurationBuilder()
+        var configurationBuilder = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json")
-            .AddJsonFile($"appsettings.Local.json", optional: true)
-            .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
+            .AddJsonFile("appsettings.Local.json", optional: true);
+
+        if (!string.IsNullOrEmpty(environmentName))
+        {
+            configurationBuilder.AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+        }
+
+        var configuration = configurationBuilder
             .AddEnvironmentVariables()
             .Build();
 
@@ -34,7 +40,7 @@ public abstract class DesignTimeDbContextFactoryBase<TContext> :
         return Create(connectionString);
     }
 
-    private TContext Create(string connectionString)
+    private TContext Create(string? connectionString)
     {
         if (string.IsNullOrEmpty(connectionString))
         {

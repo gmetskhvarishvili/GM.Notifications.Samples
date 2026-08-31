@@ -9,7 +9,7 @@ using GM.Notifications.Sample.Domain.SeedWork;
 
 namespace GM.Notifications.Sample.Worker.Workers;
 
-public class InboxProcessorWorker(
+public sealed class InboxProcessorWorker(
     IServiceScopeFactory scopeFactory,
     ILogger<InboxProcessorWorker> logger,
     IConfiguration configuration)
@@ -129,22 +129,22 @@ public class InboxProcessorWorker(
         }
     }
 
-    private async Task HandleEventAsync(string eventType, string payload, IMediator mediator, CancellationToken cancellationToken)
+    private static async Task HandleEventAsync(string eventType, string payload, IMediator mediator, CancellationToken cancellationToken)
     {
-        var typeFullName = eventType.Contains('.') ? eventType : 
-            EventTypeMap.Values.FirstOrDefault(v => v.EndsWith("." + eventType)) ?? eventType;
+        var typeFullName = eventType.Contains('.', StringComparison.Ordinal) ? eventType :
+            EventTypeMap.Values.FirstOrDefault(v => v.EndsWith("." + eventType, StringComparison.Ordinal)) ?? eventType;
 
         switch (typeFullName)
         {
-            case var t when t.EndsWith(nameof(UserRegisteredIntegrationEvent)):
+            case var t when t.EndsWith(nameof(UserRegisteredIntegrationEvent), StringComparison.Ordinal):
                 await HandleUserRegisteredAsync(payload, mediator, cancellationToken);
                 break;
-            
-            case var t when t.EndsWith(nameof(UserConfirmedIntegrationEvent)):
+
+            case var t when t.EndsWith(nameof(UserConfirmedIntegrationEvent), StringComparison.Ordinal):
                 await HandleUserConfirmedAsync(payload, mediator, cancellationToken);
                 break;
 
-            case var t when t.EndsWith(nameof(OtpGeneratedIntegrationEvent)):
+            case var t when t.EndsWith(nameof(OtpGeneratedIntegrationEvent), StringComparison.Ordinal):
                 await HandleOtpGeneratedAsync(payload, mediator, cancellationToken);
                 break;
 
@@ -153,13 +153,14 @@ public class InboxProcessorWorker(
         }
     }
 
-    private async Task HandleUserRegisteredAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
+    private static async Task HandleUserRegisteredAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
     {
         var evt = JsonSerializer.Deserialize<UserRegisteredIntegrationEvent>(payload)
                   ?? throw new InvalidOperationException("Inbox payload could not be deserialized.");
+        var email = evt.Email ?? throw new InvalidOperationException("UserRegisteredIntegrationEvent.Email is required.");
 
         var command = new SendEmailCommand(
-            evt.Email,
+            email,
             "Welcome to GM Notifications Sample",
             $"Hello {evt.Username},\n\nThank you for registering!",
             UserId: evt.UserId);
@@ -167,19 +168,20 @@ public class InboxProcessorWorker(
         await mediator.Send(command, cancellationToken);
     }
 
-    private async Task HandleUserConfirmedAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
+    private static async Task HandleUserConfirmedAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
     {
         var evt = JsonSerializer.Deserialize<UserConfirmedIntegrationEvent>(payload)
                   ?? throw new InvalidOperationException("Inbox payload could not be deserialized.");
+        var subject = evt.Subject ?? throw new InvalidOperationException("UserConfirmedIntegrationEvent.Subject is required.");
 
         switch (evt.ConfirmationType)
         {
             case 0: // Email confirmation
             {
                 var command = new SendEmailCommand(
-                    evt.Subject,
+                    subject,
                     "Email Confirmed",
-                    $"Hello {evt.Subject},\n\nThank you for confirming email!",
+                    $"Hello {subject},\n\nThank you for confirming email!",
                     UserId: evt.UserId);
                 await mediator.Send(command, cancellationToken);
                 break;
@@ -187,7 +189,7 @@ public class InboxProcessorWorker(
             case 1: // SMS confirmation
             {
                 var command = new SendSmsCommand(
-                    evt.Subject,
+                    subject,
                     "Phone Number Confirmed",
                     UserId: evt.UserId);
                 await mediator.Send(command, cancellationToken);
@@ -196,7 +198,7 @@ public class InboxProcessorWorker(
             case 2: // WhatsApp confirmation
             {
                 var command = new SendWhatsAppCommand(
-                    evt.Subject,
+                    subject,
                     "Phone Number Confirmed",
                     UserId: evt.UserId);
                 await mediator.Send(command, cancellationToken);
@@ -207,7 +209,7 @@ public class InboxProcessorWorker(
         }
     }
 
-    private async Task HandleOtpGeneratedAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
+    private static async Task HandleOtpGeneratedAsync(string payload, IMediator mediator, CancellationToken cancellationToken)
     {
         var evt = JsonSerializer.Deserialize<OtpGeneratedIntegrationEvent>(payload)
                   ?? throw new InvalidOperationException("Inbox payload could not be deserialized.");

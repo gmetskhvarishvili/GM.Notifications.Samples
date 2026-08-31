@@ -12,7 +12,7 @@ public sealed record GetSlackMessagesListQuery(
 
 public sealed record GetSlackMessagesListResult(IReadOnlyList<SlackNotificationDto> Items, int TotalCount);
 
-public class GetSlackMessagesListQueryHandler(IUnitOfWork unitOfWork)
+public sealed class GetSlackMessagesListQueryHandler(IUnitOfWork unitOfWork)
     : IRequestHandler<GetSlackMessagesListQuery, GetSlackMessagesListResult>
 {
     public async Task<GetSlackMessagesListResult> Handle(GetSlackMessagesListQuery request, CancellationToken cancellationToken)

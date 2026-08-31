@@ -2,7 +2,7 @@ using GM.EntityFramework.Domain.Abstractions;
 
 namespace GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.PushNotificationAggregate;
 
-public class PushNotification : GM.Notifications.Domain.Entities.PushNotification, IAggregateRoot
+public sealed class PushNotification : GM.Notifications.Domain.Entities.PushNotification, IAggregateRoot
 {
     private PushNotification()
     {

@@ -16,7 +16,7 @@ public sealed record SendSlackBatchItem(
 
 public sealed record SendSlackBatchResult(IReadOnlyList<Guid> NotificationIds);
 
-public class SendSlackBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendSlackBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendSlackBatchCommand, SendSlackBatchResult>
 {
     public async Task<SendSlackBatchResult> Handle(SendSlackBatchCommand request, CancellationToken cancellationToken)

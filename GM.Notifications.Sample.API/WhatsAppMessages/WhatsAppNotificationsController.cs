@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using GM.API.Controllers;
 using GM.Notifications.Domain.Enums;
 using GM.Notifications.Sample.Application.WhatsAppMessages.Commands.CancelWhatsApp;
@@ -13,8 +14,9 @@ namespace GM.Notifications.Sample.API.WhatsAppMessages;
 /// WhatsApp Notifications Controller
 /// </summary>
 [ApiController]
-[Route("api/notifications/whatsapp-messages")]
-public class WhatsAppNotificationsController : BaseController
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/notifications/whatsapp-messages")]
+public sealed class WhatsAppNotificationsController : BaseController
 {
     /// <summary>
     /// Send a WhatsApp notification

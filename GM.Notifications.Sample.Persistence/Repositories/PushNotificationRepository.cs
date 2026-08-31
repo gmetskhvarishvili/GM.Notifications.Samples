@@ -5,5 +5,5 @@ using GM.Notifications.Sample.Persistence.Context;
 
 namespace GM.Notifications.Sample.Persistence.Repositories;
 
-public class PushNotificationRepository(ApplicationDbContext context)
+public sealed class PushNotificationRepository(ApplicationDbContext context)
     : GenericRepository<PushNotification, ApplicationDbContext>(context), IPushNotificationRepository;

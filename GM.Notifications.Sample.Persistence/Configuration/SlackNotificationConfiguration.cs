@@ -3,4 +3,4 @@ using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.S
 
 namespace GM.Notifications.Sample.Persistence.Configuration;
 
-public class SlackNotificationConfiguration() : SlackNotificationConfiguration<SlackNotification>("slack", "SlackNotifications");
+public sealed class SlackNotificationConfiguration() : SlackNotificationConfiguration<SlackNotification>("slack", "SlackNotifications");

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GM.Notifications.Sample.EmailWorker.Workers;
 
-public class EmailNotificationWorker(
+public sealed class EmailNotificationWorker(
     ILogger<EmailNotificationWorker> logger,
     IServiceScopeFactory scopeFactory,
     NotificationOptions options) : BackgroundService

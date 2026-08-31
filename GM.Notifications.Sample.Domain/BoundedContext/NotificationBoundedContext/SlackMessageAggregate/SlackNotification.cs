@@ -2,7 +2,7 @@ using GM.EntityFramework.Domain.Abstractions;
 
 namespace GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.SlackMessageAggregate;
 
-public class SlackNotification : GM.Notifications.Domain.Entities.SlackNotification, IAggregateRoot
+public sealed class SlackNotification : GM.Notifications.Domain.Entities.SlackNotification, IAggregateRoot
 {
     private SlackNotification()
     {

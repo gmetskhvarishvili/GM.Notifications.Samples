@@ -16,7 +16,7 @@ public sealed record SendWhatsAppBatchItem(
 
 public sealed record SendWhatsAppBatchResult(IReadOnlyList<Guid> NotificationIds);
 
-public class SendWhatsAppBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
+public sealed class SendWhatsAppBatchCommandHandler(IUnitOfWork unitOfWork, NotificationOptions options)
     : IRequestHandler<SendWhatsAppBatchCommand, SendWhatsAppBatchResult>
 {
     public async Task<SendWhatsAppBatchResult> Handle(SendWhatsAppBatchCommand request, CancellationToken cancellationToken)
