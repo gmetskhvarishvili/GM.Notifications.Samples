@@ -29,7 +29,7 @@ public static class DependencyInjection
                 {
                     o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     o.CommandTimeout(60);
-                });
+                }).UseSnakeCaseNamingConvention();
             options.UseInternalServiceProvider(serviceProvider);
         });
 
@@ -48,7 +48,7 @@ public static class DependencyInjection
                 {
                     o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     o.CommandTimeout(60);
-                });
+                }).UseSnakeCaseNamingConvention();
         });
 
         AddDI(services);
