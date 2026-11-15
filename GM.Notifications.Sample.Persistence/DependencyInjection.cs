@@ -1,5 +1,4 @@
 using GM.Messaging.Persistence;
-using GM.Messaging.Persistence.Inbox;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate.Interfaces;
 using GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.EmailNotificationAggregate.Interfaces;
@@ -64,9 +63,7 @@ public static class DependencyInjection
         services.AddTransient<IPushNotificationRepository, PushNotificationRepository>();
         services.AddTransient<ISlackNotificationRepository, SlackNotificationRepository>();
         services.AddTransient<IInboxMessageRepository, InboxMessageRepository>();
-        services.AddTransient<InboxMessageRepository>();
-        services.AddTransient<IInboxStore<InboxMessage>, InboxMessageRepository>();
-        services.AddGMInboxProcessor<InboxMessage>();
+        services.AddGMInbox<InboxMessage, ApplicationDbContext>();
         services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>();
     }
 }
