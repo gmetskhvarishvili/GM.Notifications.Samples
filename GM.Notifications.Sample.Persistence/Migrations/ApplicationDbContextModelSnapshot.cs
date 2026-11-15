@@ -166,7 +166,7 @@ namespace GM.Notifications.Sample.Persistence.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_inbox_messages_user_id");
 
-                    b.ToTable("inbox_messages", "inbox_messages");
+                    b.ToTable("inbox_messages", "messaging");
                 });
 
             modelBuilder.Entity("GM.Notifications.Sample.Domain.BoundedContext.NotificationBoundedContext.EmailNotificationAggregate.EmailNotification", b =>
