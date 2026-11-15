@@ -28,7 +28,9 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
   (`IsReadyToSend` → `MarkSent` / `MarkFailed` with retry).
 - A **Consumer.Worker** that subscribes to integration events over **RabbitMQ** (e.g.
   `user.registered`, `user.confirmed`, `otp.generated`) and turns them into notifications via an
-  inbox — showing how notifications get created from other services' events.
+  inbox — showing how notifications get created from other services' events. The inbox is
+  registered with `AddGMInbox<InboxMessage, ApplicationDbContext>()`, using GM.Messaging's built-in
+  EF Core store.
 - **CQRS** with GM.Mediator; **DDD** aggregates per channel (deriving from
   `GM.Notifications.Domain`'s `NotificationBase`); localized errors via GM.Exceptions.
 
