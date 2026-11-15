@@ -30,7 +30,7 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
   `user.registered`, `user.confirmed`, `otp.generated`) and turns them into notifications via an
   inbox — showing how notifications get created from other services' events. The inbox is
   registered with `AddGMInbox<InboxMessage, ApplicationDbContext>()`, using GM.Messaging's built-in
-  EF Core store.
+  EF Core store, and its `inbox_messages` table lives in the shared `messaging` schema.
 - **CQRS** with GM.Mediator; **DDD** aggregates per channel (deriving from
   `GM.Notifications.Domain`'s `NotificationBase`); localized errors via GM.Exceptions.
 
