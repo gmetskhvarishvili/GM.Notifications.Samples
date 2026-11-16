@@ -129,6 +129,15 @@ namespace GM.Notifications.Sample.Persistence.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("consumer_name");
 
+                    b.Property<int>("Attempts")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer")
+                        .HasColumnName("attempts");
+
+                    b.Property<DateTime?>("DeadLetteredAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("dead_lettered_at_utc");
+
                     b.Property<string>("Error")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)")
@@ -139,6 +148,23 @@ namespace GM.Notifications.Sample.Persistence.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("event_type");
+
+                    b.Property<bool>("Ingested")
+                        .HasColumnType("boolean")
+                        .HasColumnName("ingested");
+
+                    b.Property<string>("LockedBy")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("locked_by");
+
+                    b.Property<DateTime?>("LockedUntilUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("locked_until_utc");
+
+                    b.Property<DateTime?>("NextAttemptAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("next_attempt_at_utc");
 
                     b.Property<string>("Payload")
                         .IsRequired()
@@ -153,6 +179,11 @@ namespace GM.Notifications.Sample.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("received_at_utc");
 
+                    b.Property<string>("TraceParent")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("trace_parent");
+
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
@@ -165,6 +196,9 @@ namespace GM.Notifications.Sample.Persistence.Migrations
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_inbox_messages_user_id");
+
+                    b.HasIndex("Ingested", "ProcessedAtUtc", "ReceivedAtUtc")
+                        .HasDatabaseName("ix_inbox_messages_pending");
 
                     b.ToTable("inbox_messages", "messaging");
                 });
