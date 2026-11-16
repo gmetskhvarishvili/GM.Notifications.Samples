@@ -11,7 +11,7 @@ public sealed class UserRegisteredHandler(IInboxProcessor inbox, ILogger<UserReg
             "[GM.Notifications.Sample.Consumer.Worker] User registered — UserId: {UserId}, Email: {Email}, PhoneNumber: {PhoneNumber}",
             message.UserId, message.Email, message.PhoneNumber);
 
-        // Ingest only: the InboxProcessorWorker poller sends the notification for this row.
+        // Ingest only: the inbox worker in GM.Notifications.Sample.Worker sends the notification for this row.
         return inbox.IngestAsync(message, "GM.Notifications.Sample.Consumer.Worker", ct);
     }
 }

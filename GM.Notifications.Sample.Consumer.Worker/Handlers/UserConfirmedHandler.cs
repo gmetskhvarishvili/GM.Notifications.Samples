@@ -11,7 +11,7 @@ public sealed class UserConfirmedHandler(IInboxProcessor inbox, ILogger<UserConf
             "[GM.Notifications.Sample.Consumer.Worker] User confirmed — Subject: {Subject}, ConfirmationType: {ConfirmationType}",
             message.Subject, message.ConfirmationType);
 
-        // Ingest only: the InboxProcessorWorker poller sends the notification for this row.
+        // Ingest only: the inbox worker in GM.Notifications.Sample.Worker sends the notification for this row.
         return inbox.IngestAsync(message, "GM.Notifications.Sample.Consumer.Worker", ct);
     }
 }
