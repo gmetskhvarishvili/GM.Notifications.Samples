@@ -31,7 +31,7 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
   inbox — showing how notifications get created from other services' events. The inbox is
   registered with `AddGMInbox<InboxMessage, ApplicationDbContext>()`, using GM.Messaging's built-in
   EF Core store, and its `inbox_messages` table lives in the shared `messaging` schema; the
-  `UpgradeGMMessagingTo2` migration adds the GM.Messaging 2.0 columns. The consumer stores events
+  `UpgradeGMMessagingTo2` and `UpgradeGMMessagingTo3` migrations add the GM.Messaging 2.0 and 3.0 columns. The consumer stores events
   with `IngestAsync`; the background worker runs GM.Messaging's inbox worker (`AddGMInboxWorker`)
   with one `IInboxHandler<TEvent>` per event (`Worker/InboxHandlers`), which sends the matching
   email, SMS or WhatsApp command. Failures retry with backoff and are dead-lettered after the last

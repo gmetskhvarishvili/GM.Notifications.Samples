@@ -149,6 +149,12 @@ namespace GM.Notifications.Sample.Persistence.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("event_type");
 
+                    b.Property<int>("EventVersion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1)
+                        .HasColumnName("event_version");
+
                     b.Property<bool>("Ingested")
                         .HasColumnType("boolean")
                         .HasColumnName("ingested");
