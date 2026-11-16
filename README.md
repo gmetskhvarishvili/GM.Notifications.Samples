@@ -34,7 +34,10 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
   `UpgradeGMMessagingTo2` and `UpgradeGMMessagingTo3` migrations add the GM.Messaging 2.0 and 3.0 columns
   (4.0 needs no database change, but declares its queues' exchanges with the alternate exchange
   `gm.unrouted`: on a broker that already has them, delete those exchanges once and the consumer
-  recreates them). The consumer stores events
+  recreates them). Personal data in the incoming events (emails, phone numbers, usernames, OTP
+  destinations and codes) is `[SensitiveData]` (GM.Messaging 4.4): ciphertext in the inbox and on RabbitMQ,
+  decrypted for the handlers with the key ring in `Messaging:SensitiveData`, shared with the Identity and
+  OTP samples. The consumer stores events
   with `IngestAsync`; the background worker runs GM.Messaging's inbox worker (`AddGMInboxWorker`)
   with one `IInboxHandler<TEvent>` per event (`Worker/InboxHandlers`), which sends the matching
   email, SMS or WhatsApp command. Failures retry with backoff and are dead-lettered after the last

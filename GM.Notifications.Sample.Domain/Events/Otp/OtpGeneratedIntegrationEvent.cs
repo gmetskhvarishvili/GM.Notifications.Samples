@@ -11,7 +11,7 @@ namespace GM.Notifications.Sample.Domain.Events.Otp;
 /// </summary>
 [MessageIdentity("otp.generated")]
 public sealed record OtpGeneratedIntegrationEvent(
-    string Destination,
+    [property: SensitiveData] string Destination,
     int Channel,
     string Purpose,
-    string Message) : IntegrationEvent;
+    [property: SensitiveData] string Message) : IntegrationEvent;
