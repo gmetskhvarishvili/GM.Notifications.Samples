@@ -1,8 +1,12 @@
+using GM.Messaging.Persistence;
 using GM.Notifications.Options;
 using GM.Notifications.Sample.Application;
 using GM.Notifications.Sample.Persistence;
 using GM.Notifications.Sample.Persistence.Context;
-using GM.Notifications.Sample.Worker.Workers;
+using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate;
+using GM.Notifications.Sample.Domain.Events.Otp;
+using GM.Notifications.Sample.Domain.Events.Users;
+using GM.Notifications.Sample.Worker.InboxHandlers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -12,7 +16,13 @@ builder.Configuration.GetSection("NotificationOptions").Bind(notificationOptions
 builder.Services.AddSingleton(notificationOptions);
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
-builder.Services.AddHostedService<InboxProcessorWorker>();
+
+// GM.Messaging's inbox worker handles the events the consumer worker ingested, one handler per event
+// type (settings: Messaging:Inbox).
+builder.Services.AddGMInboxWorker<InboxMessage, ApplicationDbContext>();
+builder.Services.AddGMInboxHandler<UserRegisteredIntegrationEvent, UserRegisteredInboxHandler>();
+builder.Services.AddGMInboxHandler<UserConfirmedIntegrationEvent, UserConfirmedInboxHandler>();
+builder.Services.AddGMInboxHandler<OtpGeneratedIntegrationEvent, OtpGeneratedInboxHandler>();
 
 var app = builder.Build();
 

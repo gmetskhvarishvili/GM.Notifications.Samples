@@ -31,7 +31,11 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
   inbox — showing how notifications get created from other services' events. The inbox is
   registered with `AddGMInbox<InboxMessage, ApplicationDbContext>()`, using GM.Messaging's built-in
   EF Core store, and its `inbox_messages` table lives in the shared `messaging` schema; the
-  `UpgradeGMMessagingTo2` migration adds the GM.Messaging 2.0 columns.
+  `UpgradeGMMessagingTo2` migration adds the GM.Messaging 2.0 columns. The consumer stores events
+  with `IngestAsync`; the background worker runs GM.Messaging's inbox worker (`AddGMInboxWorker`)
+  with one `IInboxHandler<TEvent>` per event (`Worker/InboxHandlers`), which sends the matching
+  email, SMS or WhatsApp command. Failures retry with backoff and are dead-lettered after the last
+  attempt (`Messaging:Inbox` settings).
 - **CQRS** with GM.Mediator; **DDD** aggregates per channel (deriving from
   `GM.Notifications.Domain`'s `NotificationBase`); localized errors via GM.Exceptions.
 
@@ -50,7 +54,7 @@ GM.Notifications.Sample.WhatsAppWorker/   # delivers pending WhatsApp notificati
 GM.Notifications.Sample.PushWorker/       # delivers pending Push notifications
 GM.Notifications.Sample.SlackWorker/      # delivers pending Slack notifications
 GM.Notifications.Sample.Consumer.Worker/  # RabbitMQ consumer: events -> notifications
-GM.Notifications.Sample.Worker/           # generic background worker
+GM.Notifications.Sample.Worker/           # GM.Messaging inbox worker: ingested events -> notifications
 tests/GM.Notifications.Sample.Tests/      # xUnit tests for the notification aggregates
 ```
 

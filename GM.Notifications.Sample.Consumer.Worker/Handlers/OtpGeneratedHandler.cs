@@ -11,7 +11,7 @@ public sealed class OtpGeneratedHandler(IInboxProcessor inbox, ILogger<OtpGenera
             "[GM.Notifications.Sample.Consumer.Worker] OTP generated — Destination: {Destination}, Channel: {Channel}, Purpose: {Purpose}",
             message.Destination, message.Channel, message.Purpose);
 
-        // Ingest only: the InboxProcessorWorker poller sends the notification for this row.
+        // Ingest only: the inbox worker in GM.Notifications.Sample.Worker sends the notification for this row.
         return inbox.IngestAsync(message, "GM.Notifications.Sample.Consumer.Worker", ct);
     }
 }
