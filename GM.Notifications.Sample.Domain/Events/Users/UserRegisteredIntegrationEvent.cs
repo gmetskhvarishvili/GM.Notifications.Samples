@@ -7,6 +7,6 @@ namespace GM.Notifications.Sample.Domain.Events.Users;
 // local type from the incoming cross-service message-type header.
 [MessageIdentity("user.registered")]
 public sealed record UserRegisteredIntegrationEvent(
-    string? Email,
-    string? Username,
-    string? PhoneNumber) : IntegrationEvent;
+    [property: SensitiveData] string? Email,
+    [property: SensitiveData] string? Username,
+    [property: SensitiveData] string? PhoneNumber) : IntegrationEvent;

@@ -1,3 +1,4 @@
+using GM.Messaging.Persistence.Protection;
 using GM.Messaging.Persistence;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate.Interfaces;
@@ -51,6 +52,8 @@ public static class DependencyInjection
         });
 
         AddDI(services);
+        // The consumer reads incoming events, whose [SensitiveData] values are encrypted (Messaging:SensitiveData).
+        services.AddGMSensitiveData(configuration);
 
         return services;
     }
