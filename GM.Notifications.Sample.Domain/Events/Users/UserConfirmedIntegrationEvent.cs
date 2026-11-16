@@ -7,5 +7,5 @@ namespace GM.Notifications.Sample.Domain.Events.Users;
 // local type from the incoming cross-service message-type header.
 [MessageIdentity("user.confirmed")]
 public sealed record UserConfirmedIntegrationEvent(
-    string? Subject,
+    [property: SensitiveData] string? Subject,
     int ConfirmationType) : IntegrationEvent;
