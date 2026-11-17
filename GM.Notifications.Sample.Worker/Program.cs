@@ -1,4 +1,3 @@
-using GM.Messaging.Persistence.Protection;
 using GM.Messaging.Persistence;
 using GM.Notifications.Options;
 using GM.Notifications.Sample.Application;
@@ -19,10 +18,9 @@ builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 
 // GM.Messaging's inbox worker handles the events the consumer worker ingested, one handler per event
-// type (settings: Messaging:Inbox).
+// type (settings: Messaging:Inbox). AddPersistence's AddGMInbox(configuration) already set up the key ring
+// for the stored events' encrypted [SensitiveData] values (Messaging:SensitiveData).
 builder.Services.AddGMInboxWorker<InboxMessage, ApplicationDbContext>();
-// The inbox worker reads stored events, whose [SensitiveData] values are encrypted.
-builder.Services.AddGMSensitiveData(builder.Configuration);
 builder.Services.AddGMInboxHandler<UserRegisteredIntegrationEvent, UserRegisteredInboxHandler>();
 builder.Services.AddGMInboxHandler<UserConfirmedIntegrationEvent, UserConfirmedInboxHandler>();
 builder.Services.AddGMInboxHandler<OtpGeneratedIntegrationEvent, OtpGeneratedInboxHandler>();

@@ -29,16 +29,19 @@ RabbitMQ inbox) and **[GM.Exceptions](https://www.nuget.org/packages/GM.Exceptio
 - A **Consumer.Worker** that subscribes to integration events over **RabbitMQ** (e.g.
   `user.registered`, `user.confirmed`, `otp.generated`) and turns them into notifications via an
   inbox — showing how notifications get created from other services' events. The inbox is
-  registered with `AddGMInbox<InboxMessage, ApplicationDbContext>()`, using GM.Messaging's built-in
-  EF Core store, and its `inbox_messages` table lives in the shared `messaging` schema; the
-  `UpgradeGMMessagingTo2` and `UpgradeGMMessagingTo3` migrations add the GM.Messaging 2.0 and 3.0 columns
-  (4.0 needs no database change, but declares its queues' exchanges with the alternate exchange
-  `gm.unrouted`: on a broker that already has them, delete those exchanges once and the consumer
-  recreates them). Personal data in the incoming events (emails, phone numbers, usernames, OTP
-  destinations and codes) is `[SensitiveData]` (GM.Messaging 4.4): ciphertext in the inbox and on RabbitMQ,
-  decrypted for the handlers with the key ring in `Messaging:SensitiveData`, shared with the Identity and
-  OTP samples. The consumer stores events
-  with `IngestAsync`; the background worker runs GM.Messaging's inbox worker (`AddGMInboxWorker`)
+  registered with `AddGMInbox<InboxMessage, ApplicationDbContext>(configuration)`, using GM.Messaging's
+  built-in EF Core store. That one call also attaches GM.Messaging's save interceptors to
+  `ApplicationDbContext` and sets up the `[SensitiveData]` key ring from configuration, so the DbContext
+  registrations carry only the app's own provider settings. The `inbox_messages` table lives in the
+  shared `messaging` schema; the `UpgradeGMMessagingTo2` and `UpgradeGMMessagingTo3` migrations add the
+  GM.Messaging 2.0 and 3.0 columns (4.0 needs no database change, but declares its queues' exchanges
+  with the alternate exchange `gm.unrouted`: on a broker that already has them, delete those exchanges
+  once and the consumer recreates them; 4.x to 5.0 needs no database change either). Personal data in
+  the incoming events (emails, phone numbers, usernames, OTP destinations and codes) is
+  `[SensitiveData]`: ciphertext in the inbox and on RabbitMQ, decrypted for the handlers with the key
+  ring in `Messaging:SensitiveData`, shared with the Identity and OTP samples. The consumer's handlers
+  only ingest: they store events with `IngestAsync` and touch nothing else in the database, so they
+  need no unit of work; the background worker runs GM.Messaging's inbox worker (`AddGMInboxWorker`)
   with one `IInboxHandler<TEvent>` per event (`Worker/InboxHandlers`), which sends the matching
   email, SMS or WhatsApp command. Failures retry with backoff and are dead-lettered after the last
   attempt (`Messaging:Inbox` settings).
