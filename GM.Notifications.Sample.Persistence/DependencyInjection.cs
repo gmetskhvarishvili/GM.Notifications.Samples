@@ -1,4 +1,3 @@
-using GM.Messaging.Persistence.Protection;
 using GM.Messaging.Persistence;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate;
 using GM.Notifications.Sample.Domain.BoundedContext.MessageBoundedContext.InboxMessageAggregate.Interfaces;
@@ -20,9 +19,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddEntityFrameworkNpgsql();
-
-        services.AddDbContextPool<ApplicationDbContext>((serviceProvider, options) =>
+        // Only our own provider settings: AddGMInbox (in AddDI) attaches GM.Messaging's save interceptors. No
+        // UseInternalServiceProvider: EF then builds its own, with the snake_case naming convention's services in it.
+        services.AddDbContextPool<ApplicationDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("ApplicationDatabase"),
                 o =>
@@ -30,10 +29,9 @@ public static class DependencyInjection
                     o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     o.CommandTimeout(60);
                 }).UseSnakeCaseNamingConvention();
-            options.UseInternalServiceProvider(serviceProvider);
         });
 
-        AddDI(services);
+        AddDI(services, configuration);
 
         return services;
     }
@@ -41,6 +39,7 @@ public static class DependencyInjection
     public static IServiceCollection AddConsumerWorkerPersistence(this IServiceCollection services,
         IConfiguration configuration)
     {
+        // Only our own provider settings: AddGMInbox (in AddDI) attaches GM.Messaging's save interceptors.
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("ApplicationDatabase"),
@@ -51,14 +50,12 @@ public static class DependencyInjection
                 }).UseSnakeCaseNamingConvention();
         });
 
-        AddDI(services);
-        // The consumer reads incoming events, whose [SensitiveData] values are encrypted (Messaging:SensitiveData).
-        services.AddGMSensitiveData(configuration);
+        AddDI(services, configuration);
 
         return services;
     }
 
-    private static void AddDI(IServiceCollection services)
+    private static void AddDI(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<IEmailNotificationRepository, EmailNotificationRepository>();
         services.AddTransient<ISmsNotificationRepository, SmsNotificationRepository>();
@@ -66,7 +63,10 @@ public static class DependencyInjection
         services.AddTransient<IPushNotificationRepository, PushNotificationRepository>();
         services.AddTransient<ISlackNotificationRepository, SlackNotificationRepository>();
         services.AddTransient<IInboxMessageRepository, InboxMessageRepository>();
-        services.AddGMInbox<InboxMessage, ApplicationDbContext>();
         services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>();
+        // The inbox, GM.Messaging's save interceptors on ApplicationDbContext, and personal data from configuration:
+        // the key ring when Messaging:SensitiveData:Keys is set (the consumer and inbox worker read [SensitiveData]
+        // values in incoming events), shared with the Identity and OTP samples. Registered after the DbContext.
+        services.AddGMInbox<InboxMessage, ApplicationDbContext>(configuration);
     }
 }

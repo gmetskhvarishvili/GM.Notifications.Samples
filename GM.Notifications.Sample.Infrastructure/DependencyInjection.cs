@@ -3,7 +3,6 @@ using GM.Notifications;
 using GM.Notifications.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Wolverine;
 
 namespace GM.Notifications.Sample.Infrastructure;
 
@@ -22,6 +21,7 @@ public static class DependencyInjection
         return services;
     }
 
+    /// <summary>GM.Messaging (Wolverine + RabbitMQ from configuration).</summary>
     public static IServiceCollection AddConsumerWorkerInfrastructure(
         this IServiceCollection services,
         IConfiguration configuration)
